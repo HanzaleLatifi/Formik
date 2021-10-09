@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {useFormik} from 'formik'
 
 function SignUpForm() {
@@ -6,15 +5,13 @@ function SignUpForm() {
    const formik=useFormik({
        initialValues:{
            name:"" , email:"" , password:""
-       }
+       } ,
+       onSubmit:(values)=>console.log(values)   
    })
-   console.log(formik.values)
-    const submitHandler=(e)=>{
-        e.preventDefault();
-    }
+    
     return (
         <>
-            <form onSubmit={submitHandler} className="Form">
+            <form onSubmit={formik.handleSubmit} className="Form">
                 <div style={{display:"flex" , flexDirection:"column"}}>
                     <label>Name</label>
                     <input type="text" value={formik.values.name} name="name" onChange={formik.handleChange}></input>
