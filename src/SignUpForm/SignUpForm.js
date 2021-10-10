@@ -1,13 +1,39 @@
 import {useFormik} from 'formik'
+//1 .
+const initialValues={
+    name:"" , email:"" , password:""
+
+}
+//2. 
+const onSubmit=(values)=>{
+    console.log(values) 
+}
+// 3 .
+const validate=(values)=>{
+    const errors={} 
+    if(!values.name){
+        errors.name="Name is Required"
+    }
+    if(!values.email){
+        errors.email="Email is required"
+    }
+    if(!values.password){
+        errors.password="Password is required"
+    }
+
+    return errors;
+
+}
 
 function SignUpForm() {
 
    const formik=useFormik({
-       initialValues:{
-           name:"" , email:"" , password:""
-       } ,
-       onSubmit:(values)=>console.log(values)   
+       initialValues,
+       onSubmit ,
+       validate ,
+
    })
+   console.log(formik.errors)
     
     return (
         <>
