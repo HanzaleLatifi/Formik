@@ -16,12 +16,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: darkred;
+    background-color: rgb(0, 63, 63);
     color: white;
     
 }
 .error{
-    margin-top: 5px;
-    color: red;
-    font-size:xx-small;
+    color: rgb(187, 6, 6);
+    font-size:small;
 }
