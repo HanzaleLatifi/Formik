@@ -33,22 +33,27 @@ function SignUpForm() {
        validate ,
 
    })
-   console.log(formik.errors)
+   console.log(formik.touched)
     
     return (
         <>
             <form onSubmit={formik.handleSubmit} className="Form">
                 <div style={{display:"flex" , flexDirection:"column"}}>
                     <label>Name</label>
-                    <input type="text" value={formik.values.name} name="name" onChange={formik.handleChange}></input>
+                    <input type="text" value={formik.values.name} onBlur={formik.handleBlur} name="name" onChange={formik.handleChange}></input>
+                    {formik.errors.name && formik.touched.name && <div className="error">{formik.errors.name}</div>}
                 </div> 
                 <div style={{display:"flex" , flexDirection:"column"}}>
                     <label>Email</label>
-                    <input type="text" value={formik.values.email} name="email" onChange={formik.handleChange}></input>
+                    <input type="text" value={formik.values.email} onBlur={formik.handleBlur} name="email" onChange={formik.handleChange}></input>
+                    {formik.errors.email && formik.touched.email && <div className="error">{formik.errors.email}</div>}
+
                 </div> 
                 <div style={{display:"flex" , flexDirection:"column"}}>
                     <label>Password</label>
-                    <input type="text" value={formik.values.password} name="password" onChange={formik.handleChange}></input>
+                    <input type="text" value={formik.values.password} onBlur={formik.handleBlur} name="password" onChange={formik.handleChange}></input>
+                    {formik.errors.password && formik.touched.password && <div className="error">{formik.errors.password}</div>}
+
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
