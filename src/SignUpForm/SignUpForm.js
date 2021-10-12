@@ -2,6 +2,7 @@ import axios from 'axios';
 import {useFormik} from 'formik'
 import { useState , useEffect } from 'react';
 import * as Yup from 'yup';
+import Input from '../Common/Input';
 
 
 //1 .
@@ -45,27 +46,12 @@ function SignUpForm() {
     return (
         <>
             <form onSubmit={formik.handleSubmit} className="Form">
-                <div style={{display:"flex" , flexDirection:"column"}}>
-                    <label>Name</label>
-                    <input type="text"  name="name" {...formik.getFieldProps("name")} ></input>
-                    {formik.errors.name && formik.touched.name && <div className="error">{formik.errors.name}</div>}
-                </div> 
-                <div style={{display:"flex" , flexDirection:"column"}}>
-                    <label>Email</label>
-                    <input type="text"  name="email" {...formik.getFieldProps("email")} ></input>
-                    {formik.errors.email && formik.touched.email && <div className="error">{formik.errors.email}</div>}
-
-                </div> 
-                <div style={{display:"flex" , flexDirection:"column"}}>
-                    <label>Password</label>
-                    <input type="text"  name="password" {...formik.getFieldProps("password")} ></input>
-                    {formik.errors.password && formik.touched.password && <div className="error">{formik.errors.password}</div>}
-                </div>
-                <div style={{display:"flex" , flexDirection:"column"}}>
-                    <label>Password Confirm</label>
-                    <input type="text"  name="passwordConfirm" {...formik.getFieldProps("passwordConfirm")} ></input>
-                    {formik.errors.passwordConfirm && formik.touched.passwordConfirm && <div className="error">{formik.errors.passwordConfirm}</div>}
-                </div>
+                
+                <Input formik={formik} label="Name" name="name" />
+                <Input formik={formik} label="Email" name="email" />
+                <Input formik={formik} label="Password" name="password" type="password"  />
+                <Input formik={formik} label="Password Confirm" name="passwordConfirm" type="password" />
+                 
                 <div>
                     <label htmlFor="1" >Male</label>
                     <input type="radio" onChange={formik.handleChange} value="1" name="gender" id="1" checked={formik.values.gender==="1"} />
