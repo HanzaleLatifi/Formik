@@ -1,15 +1,12 @@
+import axios from 'axios';
 import {useFormik} from 'formik'
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import * as Yup from 'yup';
-import { string } from 'yup/lib/locale';
 
 
 //1 .
 
-const savedData={
-    name:"hasti" , email:"hasti@gmail.com" , password:"5252" , passwordConfirm:"5252" , gender:"0"
 
-}
 const initialValues={
     name:"" , email:"" , password:"" , passwordConfirm:"" , gender:""
 
@@ -30,6 +27,11 @@ const validationSchema=Yup.object({
 function SignUpForm() {
 
     const [formValues, setFormValues] = useState(null)
+
+    useEffect(() => {
+        axios.get("http://localhost:3001/user/1").then((res)=>setFormValues(res.data)).catch((err=>console.log(err)))
+       
+    }, [])
 
    const formik=useFormik({
        initialValues:formValues || initialValues ,
@@ -72,7 +74,6 @@ function SignUpForm() {
                     {formik.errors.gender && formik.touched.gender && <div className="error">{formik.errors.gender}</div>}
 
                 </div>
-                <button onClick={()=>setFormValues(savedData)}>load</button>
                 <button type="submit" disabled={!formik.isValid}>Sign Up</button>
             </form>
 
