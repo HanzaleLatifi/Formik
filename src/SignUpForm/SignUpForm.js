@@ -4,13 +4,14 @@ import { useState , useEffect } from 'react';
 import * as Yup from 'yup';
 import Input from '../Common/Input';
 import RadioInput from '../Common/RadioInput';
+import SelectComponent from '../Common/SelectComponent';
 
 
 //1 .
 
 
 const initialValues={
-    name:"" , email:"" , password:"" , passwordConfirm:"" , gender:""
+    name:"" , email:"" , password:"" , passwordConfirm:"" , gender:"" , nationality:""
 
 }
 //2. 
@@ -23,12 +24,19 @@ const validationSchema=Yup.object({
     email:Yup.string().required('Email is required').email('email is invalid') ,
     password:Yup.string().required('password is Required') ,
     passwordConfirm:Yup.string().required("password Confirm is required").oneOf([Yup.ref('password'), null], 'Passwords must match') ,
-    gender:Yup.string().required("gender Confirm is required")
+    gender:Yup.string().required("gender Confirm is required") ,
+    nationality:Yup.string().required("select Nationality")
 });
 
 const radioOptions=[
     {label:"Male" , value:"1"} ,
     {label:"female" , value:"0"}
+]
+const selectOptions=[
+    {label:"select Country" , value:"" },
+    {label:"iran" , value:"IR"} ,
+    {label:"japan" , value:"JP"} ,
+    {label:"qatar" , value:"QA"}
 ]
 
 function SignUpForm() {
@@ -58,6 +66,8 @@ function SignUpForm() {
                 <Input formik={formik} label="Password" name="password" type="password"  />
                 <Input formik={formik} label="Password Confirm" name="passwordConfirm" type="password" />
                 <RadioInput formik={formik} name="gender" radioOptions={radioOptions}/> 
+                <SelectComponent formik={formik} selectOptions={selectOptions} name="nationality"/>
+
 
                 <button type="submit" disabled={!formik.isValid}>Sign Up</button>
             </form>
