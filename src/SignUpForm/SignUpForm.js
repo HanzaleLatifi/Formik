@@ -12,12 +12,14 @@ import SelectComponent from '../Common/SelectComponent';
 
 
 const initialValues = {
-    name: "", email: "", password: "", passwordConfirm: "", gender: "", nationality: "", intrests: [], terms: false
+    name: "", email: "", password: "", passwordConfirm: "", gender: "", nationality: "", intrests:[], terms: false
 
 }
 //2. 
 const onSubmit = (values) => {
     console.log(values)
+    
+    axios.post("http://localhost:3001/user",values).then((res)=>console.log(res.data)).catch(err=>console.log(err))
 }
 // 3 .
 const validationSchema = Yup.object({
@@ -44,8 +46,8 @@ const selectOptions = [
     { label: "qatar", value: "QA" }
 ]
 const checkBox = [
-    { label: "React.js", value: "react.js" },
-    { label: "Vue.js", value: "vue.js" }
+    { label: "React.js", value: "React.js" },
+    { label: "Vue.js", value: "Vue.js" }
 ]
 
 function SignUpForm() {
