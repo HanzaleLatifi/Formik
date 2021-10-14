@@ -2,6 +2,7 @@ import axios from 'axios';
 import {useFormik} from 'formik'
 import { useState , useEffect } from 'react';
 import * as Yup from 'yup';
+import CheckBox from '../Common/CheckBox';
 import Input from '../Common/Input';
 import RadioInput from '../Common/RadioInput';
 import SelectComponent from '../Common/SelectComponent';
@@ -11,7 +12,7 @@ import SelectComponent from '../Common/SelectComponent';
 
 
 const initialValues={
-    name:"" , email:"" , password:"" , passwordConfirm:"" , gender:"" , nationality:""
+    name:"" , email:"" , password:"" , passwordConfirm:"" , gender:"" , nationality:"" , intrests:[]
 
 }
 //2. 
@@ -25,9 +26,11 @@ const validationSchema=Yup.object({
     password:Yup.string().required('password is Required') ,
     passwordConfirm:Yup.string().required("password Confirm is required").oneOf([Yup.ref('password'), null], 'Passwords must match') ,
     gender:Yup.string().required("gender Confirm is required") ,
-    nationality:Yup.string().required("select Nationality")
+    nationality:Yup.string().required("select Nationality") ,
+    intrests:Yup.array().min(1).required("required")
 });
 
+//array of obj for map in common compunents
 const radioOptions=[
     {label:"Male" , value:"1"} ,
     {label:"female" , value:"0"}
@@ -37,6 +40,10 @@ const selectOptions=[
     {label:"iran" , value:"IR"} ,
     {label:"japan" , value:"JP"} ,
     {label:"qatar" , value:"QA"}
+]
+const checkBox=[
+    {label:"React.js" , value:"react.js"} ,
+    {label:"Vue.js" , value:"vue.js"}
 ]
 
 function SignUpForm() {
@@ -67,6 +74,7 @@ function SignUpForm() {
                 <Input formik={formik} label="Password Confirm" name="passwordConfirm" type="password" />
                 <RadioInput formik={formik} name="gender" radioOptions={radioOptions}/> 
                 <SelectComponent formik={formik} selectOptions={selectOptions} name="nationality"/>
+                <CheckBox formik={formik} checkBox={checkBox} name="intrests"/>
 
 
                 <button type="submit" disabled={!formik.isValid}>Sign Up</button>
